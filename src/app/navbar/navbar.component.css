@@ -1,0 +1,38 @@
+/* Navbar */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 15vw;
+  height: 88vh;
+  background-color: #e6e5e5;
+  position: fixed;
+  overflow: auto;
+  top: 11vh;
+  border-radius: 1em;
+}
+
+li a {
+  display: block;
+  color: #202020;
+  padding: 1vh 1vw;
+  margin: 0.5em;
+  font-size: 1.5em;
+  text-decoration: none;
+  background-color: #cfcece;
+  border-radius: 0.5em;
+  text-align: center;
+}
+
+li a:hover {
+  background-color: #c4c3c3;
+}
+
+.active a:hover {
+  background-color: #7698e0;
+}
+
+.active a {
+  background-color: #84a9f7;
+  font-weight: bold;
+}
