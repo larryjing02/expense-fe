@@ -7,6 +7,9 @@ import { HeaderComponent } from './header/header.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SearchComponent } from './search/search.component';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { ExpenseListComponent } from './expense-list/expense-list.component';
+import { OverviewComponent } from './overview/overview.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,10 @@ import { SearchComponent } from './search/search.component';
     HeaderComponent,
     NavbarComponent,
     DashboardComponent,
-    SearchComponent
+    SearchComponent,
+    BarChartComponent,
+    ExpenseListComponent,
+    OverviewComponent
   ],
   imports: [
     BrowserModule,
