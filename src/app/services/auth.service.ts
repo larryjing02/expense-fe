@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from '../model/User';
-import { UrlSerializer } from '@angular/router';
+import { API_ENDPOINTS } from '../constants/api-endpoints';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -13,7 +13,7 @@ export class AuthService {
   public currentUser: Observable<User>;
 
   constructor(private http: HttpClient) {
-    var current = localStorage.getItem('currentUser') ?? "";
+    var current = localStorage.getItem('currentUser') ?? "{}";
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(current));
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
-    return this.http.post<any>(`/api/authenticate`, { username, password })
+    return this.http.post<any>(API_ENDPOINTS.AUTHENTICATE, { username, password })
       .pipe(map(user => {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem('currentUser', JSON.stringify(user));
@@ -39,7 +39,7 @@ export class AuthService {
 
   logout() {
     // remove user from local storage to log user out
-    localStorage.setItem('currentUser', "");
+    localStorage.setItem('currentUser', "{}");
     this.loggedIn.next(false);
   }
 }

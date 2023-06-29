@@ -1,35 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+export class LoginComponent {
+  
+  constructor(private authService: AuthService) {}
 
-export class LoginComponent implements OnInit {
-  loginForm: FormGroup = new FormGroup({});
-
-  constructor(private formBuilder: FormBuilder) { }
-
-  ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-  }
-
-  onSubmit() {
-    if (this.loginForm.invalid) {
+  onSubmit(loginForm: NgForm) {
+    if (!loginForm.valid) {
       return;
     }
 
-    const username = this.loginForm.get('username')?.value;
-    const password = this.loginForm.get('password')?.value;
+    const username = loginForm.value.username;
+    const password = loginForm.value.password;
+    console.log(`Attempting to log in username: ${username} password:${password}`)
 
-    console.log(`Username: ${username}`);
-    console.log(`Password: ${password}`);
+    this.authService.login(username, password)
+      .subscribe({
+        next: success => {
+          if (success) {
+            console.log('Login successful!');
+            // You could also redirect the user to a different page here.
+          } else {
+            console.log('Login failed!');
+          }
+        },
+        error: error => {
+          console.log('Login error!', error);
+        }
+      });
 
-    this.loginForm.reset();
+
+    loginForm.reset();
   }
 }
