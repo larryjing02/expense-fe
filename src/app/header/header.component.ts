@@ -27,7 +27,9 @@ export class HeaderComponent {
   @HostListener('document:click', ['$event'])
   handleClick(event: Event) {
     const target = event.target as HTMLElement;
-    if (!target.closest('.dropdown-menu')) {
+    if (target.closest('.logout-button')) {
+      return;
+    } else if (!target.closest('.dropdown-menu')) {
       this.isDropdownOpen = false;
     }
   }
