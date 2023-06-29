@@ -1,7 +1,15 @@
 <header>
-    <div class="header-left">
-        <img src="assets/icon.svg" alt="Icon" id="logo">
-        <h1>Expense Tracker</h1>
+  <div class="header-left">
+    <img src="assets/icon.svg" alt="Icon" id="logo">
+    <h1>Expense Tracker</h1>
+  </div>
+  <div class="header-right">
+    <h2>Hi, {{ currentUserFirstName }}!</h2>
+    <div class="dropdown-menu" [class.open]="isDropdownOpen">
+      <button class="menu-button" (click)="toggleDropdown()">☰</button>
+      <div class="dropdown-content">
+        <button class="logout-button" (click)="logout()">Logout</button>
+      </div>
     </div>
-    <h2>Hi, Larry!</h2>
+  </div>
 </header>
