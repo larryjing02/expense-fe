@@ -1,14 +1,17 @@
-<div>
-  <h2>Sign In</h2>
-  <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" autocomplete="off">
-    <div>
-      <label for="username">Username: </label>
-      <input type="text" id="username" name="username" ngModel required>
-    </div>
-    <div>
-      <label for="password">Password: </label>
-      <input type="password" id="password" name="password" ngModel required>
-    </div>
-    <button type="submit">Login</button>
-  </form>
+<div class = "login-page">
+  <div class="login-form">
+    <h2>Sign In</h2>
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" autocomplete="off">
+      <div class="input-field">
+        <img src="assets/user.svg" alt="Username icon" class="icon">
+        <input type="text" id="username" name="username" ngModel required placeholder="Username">
+      </div>
+      <div class="input-field">
+        <img src="assets/password.svg" alt="Password icon" class="icon">
+        <input type="password" id="password" name="password" ngModel required placeholder="Password">
+      </div>
+      <button type="submit">Continue</button>
+    </form>
+  </div>
+  <p>No account yet? <a href="/register">Signup</a></p>
 </div>
