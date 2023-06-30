@@ -18,7 +18,7 @@
 
 .login-form h2 {
   margin-top: 0;
-  margin-bottom: 1.75rem;
+  margin-bottom: 0.6rem;
 }
 
 .login-form input {
@@ -61,3 +61,33 @@ a {
   color: #0066ff;
   text-decoration: none;
 }
+
+.error-message {
+  color: red;
+}
+
+.loading-bar-container {
+  height: 0.1em;
+  margin-bottom: 0.6em;
+}
+
+.loading-bar {
+  height: 0.1em;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, transparent, #0066ff, transparent, transparent);
+  background-size: 200% 100%;
+  animation: loading 1s linear infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 100% 0;
+  }
+  50% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+

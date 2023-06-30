@@ -8,32 +8,38 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  
+  // Track whether or not loading screen is enabled
+  isLoading = false;
+  // Track error message to display to user
+  errorMessage: string = "";
+
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit(loginForm: NgForm) {
     if (!loginForm.valid) {
       return;
     }
-
     const username = loginForm.value.username;
     const password = loginForm.value.password;
-    console.log(`Attempting to log in username: ${username} password:${password}`)
 
-    this.authService.login(username, password)
-      .subscribe({
-        next: success => {
-          if (success) {
-            console.log('Login successful!');
-            this.router.navigate(['/dashboard']);
-          } else {
-            console.log('Login failed!');
-          }
-        },
-        error: error => {
-          console.log('Login error!', error);
+    this.isLoading = true;
+    this.authService.login(username, password).subscribe({
+      next: () => {
+        // Successful login
+        this.isLoading = false;
+        this.router.navigate(['/dashboard']);
+      },
+      error: error => {
+        // Unsuccessful login - either unauthorized or server/API error
+        this.isLoading = false;
+        if (error.status === 401) {
+          this.errorMessage = "Invalid username or password.";
+        } else {
+          this.errorMessage = "Looks like something went wrong! Please try again later.";
+          console.log('Error when attempting login!', error);
         }
-      });
+      }
+    });
     loginForm.reset();
   }
 }

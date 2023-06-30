@@ -22,14 +22,17 @@ li a {
   background-color: #cfcece;
   border-radius: 0.5em;
   text-align: center;
+  transition: background-color 0.1s ease-in-out;
 }
 
 li a:hover {
   background-color: #c4c3c3;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .active a:hover {
   background-color: #7698e0;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .active a {

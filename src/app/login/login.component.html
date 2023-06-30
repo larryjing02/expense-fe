@@ -1,7 +1,10 @@
 <div class = "login-page">
   <div class="login-form">
     <h2>Sign In</h2>
-    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" autocomplete="off">
+    <div class="loading-bar-container">
+      <div *ngIf="isLoading" class="loading-bar"></div>
+    </div>
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" autocomplete="off">
       <div class="input-field">
         <img src="assets/user.svg" alt="Username icon" class="icon">
         <input type="text" id="username" name="username" ngModel required placeholder="Username">
@@ -10,6 +13,9 @@
         <img src="assets/password.svg" alt="Password icon" class="icon">
         <input type="password" id="password" name="password" ngModel required placeholder="Password">
       </div>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>      
       <button type="submit">Continue</button>
     </form>
   </div>
