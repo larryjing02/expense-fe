@@ -1,10 +1,10 @@
-<div class = "login-page">
+<div class="login-page">
   <div class="login-form">
     <h2>Sign In</h2>
     <div class="loading-bar-container">
       <div *ngIf="isLoading" class="loading-bar"></div>
     </div>
-        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" autocomplete="off">
+    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" autocomplete="off">
       <div class="input-field">
         <img src="assets/user.svg" alt="Username icon" class="icon">
         <input type="text" id="username" name="username" ngModel required placeholder="Username">
@@ -19,5 +19,5 @@
       <button type="submit">Continue</button>
     </form>
   </div>
-  <p>No account yet? <a href="/register">Signup</a></p>
+  <p>No account yet? <a href="/register">Sign Up</a></p>
 </div>

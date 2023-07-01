@@ -35,6 +35,15 @@ export class AuthService {
       }));
   }
 
+  register(username: string, password: string, firstName: string, lastName: string) {
+    return this.http.post<any>(API_ENDPOINTS.REGISTER, { username, password, firstName, lastName })
+      .pipe(map(user => {
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.currentUserSubject.next(user);
+        return user;
+      }));
+  }
+
   logout() {
     // remove user from local storage to log user out
     localStorage.setItem('currentUser', "{}");

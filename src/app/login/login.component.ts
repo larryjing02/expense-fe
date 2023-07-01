@@ -34,6 +34,8 @@ export class LoginComponent {
         this.isLoading = false;
         if (error.status === 401) {
           this.errorMessage = "Invalid username or password.";
+        } else if (error.status === 404) {
+          this.errorMessage = "Username not found.";
         } else {
           this.errorMessage = "Looks like something went wrong! Please try again later.";
           console.log('Error when attempting login!', error);

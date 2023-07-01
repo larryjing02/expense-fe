@@ -1,1 +1,29 @@
-<p>register works!</p>
+<div class="register-page">
+  <div class="register-form">
+    <h2>Sign Up</h2>
+    <div class="loading-bar-container">
+      <div *ngIf="isLoading" class="loading-bar"></div>
+    </div>
+    <form #registerForm="ngForm" (ngSubmit)="onSubmit(registerForm)" autocomplete="off">
+      <label for="name" class="form-label">Full Name</label>
+      <div class="name-field">
+        <input type="text" id="firstName" name="firstName" ngModel required placeholder="First Name">
+        <input type="text" id="lastName" name="lastName" ngModel required placeholder="Last Name">
+      </div>
+      <label for="username" class="form-label">Username</label>
+      <input type="text" id="username" name="username" ngModel required placeholder="e.g. coolkid69">
+      <label for="password" class="form-label">Password</label>
+      <div class="password-field">
+        <input [type]="showPassword ? 'text' : 'password'" id="password" name="password" ngModel required placeholder="At least 6 characters!">
+        <button type="button" (click)="showPassword = !showPassword">
+          <img [src]="showPassword ? 'assets/hide-password-icon.svg' : 'assets/show-password-icon.svg'" alt="Toggle password visibility">
+        </button>
+      </div>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>      
+      <button type="submit">Continue</button>
+    </form>
+  </div>
+  <p>Already have an account? <a routerLink="/login">Sign In</a></p>
+</div>
