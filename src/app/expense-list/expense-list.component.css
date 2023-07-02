@@ -1,0 +1,9 @@
+.expense-list {
+  margin-top: 1vh;
+  margin-right: 2em;
+  padding: 2em;
+  height: 88vh;
+  background-color: #e6e5e5;
+  box-sizing: border-box;
+  border-radius: 1em;
+}

@@ -1,0 +1,11 @@
+.dashboard {
+  display: flex;
+}
+
+app-overview {
+  width: 60%;
+}
+
+app-expense-list {
+  width: 40%;
+}

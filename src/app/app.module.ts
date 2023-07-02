@@ -16,6 +16,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PublicComponent } from './public/public.component';
 import { PrivateComponent } from './private/private.component';
+import { ExpenseItemComponent } from './expense-item/expense-item.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { PrivateComponent } from './private/private.component';
     LoginComponent,
     RegisterComponent,
     PublicComponent,
-    PrivateComponent
+    PrivateComponent,
+    ExpenseItemComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,22 @@
+.expense-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.expense-item .amount {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.expense-item .category, .expense-item .timestamp {
+  color: #888;
+}
+
+.expense-item .options-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
