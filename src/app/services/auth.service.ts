@@ -21,8 +21,7 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    // console.log(this.currentUserValue);
-    return this.currentUser != null && Object.keys(this.currentUserValue).length > 0;
+    return this.currentUserValue != null && Object.keys(this.currentUserValue).length > 0;
   }
 
   login(username: string, password: string) {
@@ -36,7 +35,11 @@ export class AuthService {
   }
 
   register(username: string, password: string, firstName: string, lastName: string) {
-    return this.http.post<any>(API_ENDPOINTS.REGISTER, { username, password, firstName, lastName })
+    return this.http.post<any>(API_ENDPOINTS.REGISTER, {
+        "Username": username,
+        "Password": password,
+        "FirstName": firstName,
+        "LastName": lastName })
       .pipe(map(user => {
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);

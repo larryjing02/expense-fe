@@ -21,13 +21,13 @@ export class RegisterComponent {
       return;
     }
 
-    const firstname = registerForm.value.firstname;
-    const lastname = registerForm.value.lastname;
+    const firstname = registerForm.value.firstName;
+    const lastname = registerForm.value.lastName;
     const username = registerForm.value.username;
     const password = registerForm.value.password;
 
     this.isLoading = true;
-    this.authService.register(firstname, lastname, username, password).subscribe({
+    this.authService.register(username, password, firstname, lastname).subscribe({
       next: () => {
         // Successful registration
         this.isLoading = false;
