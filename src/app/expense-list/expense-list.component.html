@@ -1,5 +1,5 @@
 <div class="expense-list">
-  <h2>Recent Expenses</h2>
+  <h2>Expense History</h2>
   <div *ngFor="let expense of expenses">
     <app-expense-item [expense]="expense" (delete)="handleDelete(expense.Id)" (edit)="handleEdit($event)"></app-expense-item>
   </div>
