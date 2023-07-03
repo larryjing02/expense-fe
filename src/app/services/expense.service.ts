@@ -16,15 +16,15 @@ export class ExpenseService {
   }
 
   addExpense(expense: ExpenseItem): Observable<ExpenseItem> {
-    return this.http.post<ExpenseItem>(API_ENDPOINTS.EXPENSE, expense);
+    return this.http.post<ExpenseItem>(API_ENDPOINTS.EXPENSE, expense, { headers: this.headers });
   }
 
   editExpense(expense: ExpenseItem): Observable<ExpenseItem> {
-    return this.http.put<ExpenseItem>(`${API_ENDPOINTS.EXPENSE}/${expense.Id}`, expense);
+    return this.http.put<ExpenseItem>(`${API_ENDPOINTS.EXPENSE}/${expense.Id}`, expense, { headers: this.headers });
   }
 
   deleteExpense(id: string): Observable<{}> {
-    return this.http.delete(`${API_ENDPOINTS.EXPENSE}/${id}`);
+    return this.http.delete(`${API_ENDPOINTS.EXPENSE}/${id}`, { headers: this.headers });
   }
 
   private get headers() {
