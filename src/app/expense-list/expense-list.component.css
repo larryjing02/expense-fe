@@ -1,11 +1,36 @@
 .expense-list {
   margin-top: 1vh;
   margin-right: 2em;
-  padding: 2em;
-  width: 32.5vw;
+  padding: 1em;
+  padding-top: 1.5em;
+  padding-bottom: 1em;
+  width: 24vw;
   height: 88vh;
   background-color: white;
   box-sizing: border-box;
   border-radius: 1em;
   position: fixed;
+}
+
+.expense-list h2 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.expense-list button {
+  display: block;
+  margin: 1em;
+  padding: 1em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+}
+
+.expense-list button:hover {
+  background-color: #0056b3;
 }

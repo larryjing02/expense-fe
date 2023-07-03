@@ -1,7 +1,17 @@
-<div>
-  <p>{{ expense.Amount }}</p>
-  <p>{{ expense.Category }}</p>
-  <p>{{ expense.Timestamp }}</p>
-  <button (click)="onEdit()">Edit</button>
-  <button (click)="onDelete()">Delete</button>
+<div class="expense-item">
+  <div class="icon-container">
+    <img [src]="getIconSource()" alt="icon" class="category-icon"/>
+  </div>
+  <div class="details">
+    <span class="description">{{expense.Description}}</span>
+    <span class="timestamp">{{expense.Timestamp | date:'short'}}</span>
+  </div>
+  <div class="amount">${{expense.Amount | number:'1.2-2'}}</div>
+  <div class="options-button" (click)="toggleDropdown()">
+    <img src="assets/three-dots-icon.svg" alt="Options"/>
+    <div *ngIf="showDropdown" class="dropdown-menu">
+      <button (click)="onEdit()">Edit</button>
+      <button (click)="onDelete()">Delete</button>
+    </div>
+  </div>
 </div>

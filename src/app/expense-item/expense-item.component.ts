@@ -11,6 +11,16 @@ export class ExpenseItemComponent {
   @Output() delete = new EventEmitter<string>();
   @Output() edit = new EventEmitter<ExpenseItem>();
 
+
+  showDropdown: boolean = false;
+
+  getIconSource() {
+    return `assets/expense-icons/${this.expense.Category.toLowerCase()}.svg`;
+  }
+
+  toggleDropdown() {
+    this.showDropdown = !this.showDropdown;
+  }
   onDelete() {
     // TODO: Add an "Are you sure?" popup
     this.delete.emit(this.expense.Id);
