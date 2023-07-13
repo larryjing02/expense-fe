@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ExpenseItem } from '../models/expense-item.model';
 import { ExpenseService } from '../services/expense.service';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-expense-list',
@@ -13,8 +14,10 @@ export class ExpenseListComponent implements OnInit {
   expenses: ExpenseItem[] = [];
   isFormVisible: boolean = false;
   isLoading: boolean = false;
+  editedExpense: ExpenseItem | null = null;
+  @ViewChild('expenseForm') expenseForm!: NgForm;
 
-  constructor(private expenseService: ExpenseService, private router: Router) {}
+  constructor(private expenseService: ExpenseService, private router: Router, private datePipe: DatePipe) {}
 
   ngOnInit() {
     this.refreshExpenses();
@@ -50,9 +53,17 @@ export class ExpenseListComponent implements OnInit {
   }
 
   handleEdit(editedExpense: ExpenseItem) {
-    this.expenseService.editExpense(editedExpense).subscribe(() => {
-      this.refreshExpenses();
-    });
+    this.editedExpense = editedExpense;
+    this.isFormVisible = true;
+    setTimeout(() => {
+      this.expenseForm.setValue({
+          description: editedExpense.Description,
+          category: editedExpense.Category,
+          amount: editedExpense.Amount,
+          date: this.datePipe.transform(editedExpense.Timestamp, 'yyyy-MM-dd'),
+          time: this.datePipe.transform(editedExpense.Timestamp, 'HH:mm')
+      });
+  });
   }
 
   onSubmit(expenseForm: NgForm) {
@@ -71,18 +82,29 @@ export class ExpenseListComponent implements OnInit {
     
     
     const expense: ExpenseItem = {
-      Id: '',
+      Id: this.editedExpense ? this.editedExpense.Id : '',
       UserId: '',
       Amount: Number(parseFloat(expenseForm.value.amount).toFixed(2)),
       Timestamp: date,
       Category: expenseForm.value.category,
       Description: expenseForm.value.description
     };
-    this.expenseService.addExpense(expense).subscribe(() => {
-      this.refreshExpenses();
-      expenseForm.reset();
-      this.isLoading = false;
-      this.isFormVisible = false;
-    });
+
+    if (this.editedExpense) {
+      this.expenseService.editExpense(expense).subscribe(() => {
+        this.refreshExpenses();
+        expenseForm.reset();
+        this.isLoading = false;
+        this.isFormVisible = false;
+        this.editedExpense = null;
+      });
+    } else {
+      this.expenseService.addExpense(expense).subscribe(() => {
+        this.refreshExpenses();
+        expenseForm.reset();
+        this.isLoading = false;
+        this.isFormVisible = false;
+      });
+    }
   }
 }

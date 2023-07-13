@@ -3,12 +3,12 @@
   <div *ngFor="let expense of expenses">
     <app-expense-item [expense]="expense" (delete)="handleDelete(expense.Id)" (edit)="handleEdit($event)"></app-expense-item>
   </div>
-  <button (click)="isFormVisible = true">Add Expense</button>
+  <button (click)="isFormVisible = true; editedExpense = null;">Add Expense</button>
 </div>
 <div>
   <div *ngIf="isFormVisible" class="overlay">
     <div class="add-expense-form">
-      <h3>Add Expense</h3>
+      <h3>{{ editedExpense ? 'Edit Expense' : 'Add Expense' }}</h3>
       <div class="loading-bar-container">
         <div *ngIf="isLoading" class="loading-bar"></div>
       </div>

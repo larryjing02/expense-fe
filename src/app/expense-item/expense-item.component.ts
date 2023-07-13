@@ -21,13 +21,14 @@ export class ExpenseItemComponent {
   toggleDropdown() {
     this.showDropdown = !this.showDropdown;
   }
+
   onDelete() {
-    // TODO: Add an "Are you sure?" popup
-    this.delete.emit(this.expense.Id);
+    if (window.confirm('Are you sure you want to delete this expense? This action cannot be undone.')) {
+      this.delete.emit(this.expense.Id);
+    }
   }
 
   onEdit() {
-    // TODO: create a form that allows the user to edit the expense.
     this.edit.emit(this.expense);
   }
 }
