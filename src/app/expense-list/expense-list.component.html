@@ -9,6 +9,9 @@
   <div *ngIf="isFormVisible" class="overlay">
     <div class="add-expense-form">
       <h3>Add Expense</h3>
+      <div class="loading-bar-container">
+        <div *ngIf="isLoading" class="loading-bar"></div>
+      </div>
       <form #expenseForm="ngForm" (ngSubmit)="onSubmit(expenseForm)" autocomplete="off">
         <div class="row">
           <input type="text" id="description" name="description" ngModel required placeholder="Description of Expense">

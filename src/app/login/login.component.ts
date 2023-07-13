@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent {
   // Track whether or not loading screen is enabled
-  isLoading = false;
+  isLoading: boolean = false;
   // Track error message to display to user
   errorMessage: string = "";
 

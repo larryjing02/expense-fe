@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class ExpenseListComponent implements OnInit {
   expenses: ExpenseItem[] = [];
   isFormVisible: boolean = false;
+  isLoading: boolean = false;
 
   constructor(private expenseService: ExpenseService, private router: Router) {}
 
@@ -58,6 +59,7 @@ export class ExpenseListComponent implements OnInit {
     if (!expenseForm.valid) {
       return;
     }
+    this.isLoading = true;
     const date = new Date(expenseForm.value.date);
     if (expenseForm.value.time) {
       const time = expenseForm.value.time.split(':');
@@ -76,12 +78,11 @@ export class ExpenseListComponent implements OnInit {
       Category: expenseForm.value.category,
       Description: expenseForm.value.description
     };
-
     this.expenseService.addExpense(expense).subscribe(() => {
       this.refreshExpenses();
+      expenseForm.reset();
+      this.isLoading = false;
+      this.isFormVisible = false;
     });
-    
-    expenseForm.reset();
-    this.isFormVisible = false;
   }
 }
