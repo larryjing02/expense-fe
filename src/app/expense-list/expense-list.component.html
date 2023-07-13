@@ -3,5 +3,31 @@
   <div *ngFor="let expense of expenses">
     <app-expense-item [expense]="expense" (delete)="handleDelete(expense.Id)" (edit)="handleEdit($event)"></app-expense-item>
   </div>
-  <button (click)="handleAdd()">Add Expense</button>
+  <button (click)="isFormVisible = true">Add Expense</button>
+
+  <div *ngIf="isFormVisible" class="overlay">
+    <div class="add-expense-form">
+      <h3>Add Expense</h3>
+      <form #expenseForm="ngForm" (ngSubmit)="onSubmit(expenseForm)">
+        <label>
+          Amount:
+          <input type="number" id="amount" name="amount" ngModel required>
+        </label>
+        <label>
+          Date:
+          <input type="date" id="date" name="date" ngModel required>
+        </label>
+        <label>
+          Category:
+          <input type="text" id="category" name="category" ngModel required>
+        </label>
+        <label>
+          Description:
+          <input type="text" id="description" name="description" ngModel required>
+        </label>
+        <button type="submit">Submit</button>
+        <button type="button" (click)="isFormVisible = false">Cancel</button>
+      </form>
+    </div>
+  </div>
 </div>

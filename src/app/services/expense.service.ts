@@ -16,10 +16,12 @@ export class ExpenseService {
   }
 
   addExpense(expense: ExpenseItem): Observable<ExpenseItem> {
+    expense.UserId = this.userId;
     return this.http.post<ExpenseItem>(API_ENDPOINTS.EXPENSE, expense, { headers: this.headers });
   }
 
   editExpense(expense: ExpenseItem): Observable<ExpenseItem> {
+    expense.UserId = this.userId;
     return this.http.put<ExpenseItem>(`${API_ENDPOINTS.EXPENSE}/${expense.Id}`, expense, { headers: this.headers });
   }
 
@@ -34,5 +36,10 @@ export class ExpenseService {
     } else {
       return new HttpHeaders();
     }
+  }
+
+  private get userId() {
+    const user = this.authService.currentUserValue;
+    return user ? user.userId : "";
   }
 }

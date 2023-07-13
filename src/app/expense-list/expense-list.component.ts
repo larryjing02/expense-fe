@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ExpenseItem } from '../models/expense-item.model';
 import { ExpenseService } from '../services/expense.service';
 import { Router } from '@angular/router';
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 })
 export class ExpenseListComponent implements OnInit {
   expenses: ExpenseItem[] = [];
+  isFormVisible: boolean = false;
 
   constructor(private expenseService: ExpenseService, private router: Router) {}
 
@@ -52,7 +54,25 @@ export class ExpenseListComponent implements OnInit {
     });
   }
 
-  handleAdd() {
-    // TODO: Open a form for adding a new expense
+  onSubmit(expenseForm: NgForm) {
+    if (!expenseForm.valid) {
+      return;
+    }
+    
+    const expense: ExpenseItem = {
+      Id: '',
+      UserId: '',
+      Amount: expenseForm.value.amount ? Number(parseFloat(expenseForm.value.amount).toFixed(2)) : 0,
+      Timestamp: expenseForm.value.date ? new Date(expenseForm.value.date) : new Date(),
+      Category: expenseForm.value.category ?? "Unknown",
+      Description: expenseForm.value.description ?? ""
+    };
+
+    this.expenseService.addExpense(expense).subscribe(() => {
+      this.refreshExpenses();
+    });
+    
+    expenseForm.reset();
+    this.isFormVisible = false;
   }
 }
