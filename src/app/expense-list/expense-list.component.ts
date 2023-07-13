@@ -58,14 +58,23 @@ export class ExpenseListComponent implements OnInit {
     if (!expenseForm.valid) {
       return;
     }
+    const date = new Date(expenseForm.value.date);
+    if (expenseForm.value.time) {
+      const time = expenseForm.value.time.split(':');
+      date.setHours(Number(time[0]) + 24, Number(time[1]));
+    } else {
+      const offset = date.getTimezoneOffset();
+      date.setMinutes(date.getMinutes() + offset);
+    }
+    
     
     const expense: ExpenseItem = {
       Id: '',
       UserId: '',
-      Amount: expenseForm.value.amount ? Number(parseFloat(expenseForm.value.amount).toFixed(2)) : 0,
-      Timestamp: expenseForm.value.date ? new Date(expenseForm.value.date) : new Date(),
-      Category: expenseForm.value.category ?? "Unknown",
-      Description: expenseForm.value.description ?? ""
+      Amount: Number(parseFloat(expenseForm.value.amount).toFixed(2)),
+      Timestamp: date,
+      Category: expenseForm.value.category,
+      Description: expenseForm.value.description
     };
 
     this.expenseService.addExpense(expense).subscribe(() => {

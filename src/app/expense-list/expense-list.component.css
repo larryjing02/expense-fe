@@ -50,8 +50,101 @@
 
 .add-expense-form {
   background: white;
-  padding: 20px;
-  border: 1px solid #ccc;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 2rem;
+  border-radius: 1rem;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.add-expense-form h3 {
+  font-size: 1.5em;
+  margin-top: 0;
+  margin-bottom: 1em;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+select {
+  margin-left: 1em;
+  font-size: 1em;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1em;
+}
+
+input .description {
+  width: 70%;
+}
+
+.buttons-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2em;
+}
+
+button[type=submit] {
+  background-color: #007bff;
+  color: white;
+  padding: 0.75em;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+
+button[type=submit]:hover {
+  background-color: #0056b3;
+}
+
+button[type=submit]:disabled {
+  background-color: gray;
+}
+button[type=submit]:disabled:hover {
+  background-color: rgb(255, 0, 0);
+}
+
+button[type=button] {
+  color: gray;
+  background: none;
+  border: none;
+}
+
+.amount-row {
+  display: flex;
+  align-items: center;
+  font-size: 1.5em;
+  margin-top: 0.5em;
+}
+
+.amount-row .dollar-sign {
+  margin-right: 0.5em;
+}
+
+.row input {
+  border: none;
+  border-bottom: 1px solid black;
+  background: transparent;
+  height: 2em;
+}
+
+#date-input {
+  width: 60%;
+}
+
+#time-input {
+  margin-left: 1em;
+  width: 40%;
+}
+
+input:focus, select:focus {
+  outline: none;
 }
