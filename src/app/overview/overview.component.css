@@ -14,22 +14,44 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin-bottom: 1vw;
 }
 
 .box {
+  position: relative;
   background: white;
   border-radius: 1rem;
   width: 100%;
   padding: 1em;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  text-align: center;
+  justify-content: flex-start;
   margin-right: 1vw;
+  overflow: hidden;
 }
 
 .box:last-child {
   margin-right: 0;
+}
+
+.box .content {
+  z-index: 2;
+  text-align: left;
+  margin-left: 1.5em;
+}
+
+.box .image {
+  position: absolute;
+  right: 1.5em;
+  top: 1em;
+  bottom: 1em;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  opacity: 20%;
+}
+
+.box .image img {
+  height: 100%;
+  object-fit: cover;
 }

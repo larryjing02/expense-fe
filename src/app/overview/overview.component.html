@@ -1,8 +1,16 @@
 <div class="overview">
   <div class="row">
-    <div class="box" *ngFor="let category of topCategories">
+    <div class="box" *ngFor="let category of topCategories; let i = index">
+      <div class="content">
+        <h3 *ngIf="i == 0; else otherCategory">Top Category: {{ category.Key }}</h3>
+        <ng-template #otherCategory>
         <h3>{{ category.Key }}</h3>
+        </ng-template>
         <p>${{ category.Value | number:'1.2-2' }}</p>
+      </div>
+      <div class="image">
+          <img src="{{ 'assets/expense-icons/' + category.Key.toLowerCase() + '.svg' }}" />
+      </div>
     </div>
   </div>
   <div class="row">
