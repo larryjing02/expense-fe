@@ -9,7 +9,6 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./bar-chart.component.css']
 })
 export class BarChartComponent implements AfterViewInit {
-  @ViewChild('chartForm') chartForm!: NgForm;
   @ViewChild('timeRange') timeRange!: ElementRef;
   @ViewChild('startDate') startDate!: ElementRef;
   @ViewChild('endDate') endDate!: ElementRef;
@@ -57,18 +56,22 @@ export class BarChartComponent implements AfterViewInit {
     this.startDate.nativeElement.value = startDate.toISOString().slice(0, 10);
     this.endDate.nativeElement.value = endDate.toISOString().slice(0, 10);
 
-    this.fetchChartData(this.chartForm);
+    this.fetchChartData();
     this.expenseService.expensesUpdated.subscribe(() => {
-      this.fetchChartData(this.chartForm);
+      this.fetchChartData();
     });
   }
 
-  fetchChartData(chartForm: NgForm) {
-    const { timeRange, startDate, endDate } = chartForm.value;
+  fetchChartData() {
+    const timeRange = this.timeRange.nativeElement.value;
+    const startDate = this.startDate.nativeElement.value;
+    const endDate = this.endDate.nativeElement.value;
     if (timeRange == null || startDate == null) {
       return;
     }
+    console.log("fetching chart data")
     this.expenseService.getExpenseChart(timeRange, startDate, endDate).subscribe((data: Array<{ Key: string, Value: number }>) => {
+      console.log("Chart data fetched!!!!");
       this.barChartLabels = data.map(item => item.Key);
       this.barChartData[0].data = data.map(item => item.Value) as any[];
     });

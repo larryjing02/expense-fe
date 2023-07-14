@@ -1,9 +1,9 @@
 <div class="bar-chart">
   <div class="form-container">
-    <form #chartForm="ngForm" (ngSubmit)="fetchChartData(chartForm)" autocomplete="off">
+    <form #chartForm="ngForm" (ngSubmit)="fetchChartData()" autocomplete="off">
       <div class="form-group">
         <label for="timeRange">Time:</label>
-        <select #timeRange id="timeRange" name="timeRange" (change)="chartForm.form.valid && fetchChartData(chartForm)">
+        <select #timeRange id="timeRange" name="timeRange" (change)="chartForm.form.valid && fetchChartData()">
             <option value="day">Day</option>
             <option value="week">Week</option>
             <option value="month">Month</option>
@@ -12,11 +12,11 @@
       </div>
       <div class="form-group">
         <label for="startDate">Start Date:</label>
-        <input #startDate type="date" id="startDate" name="startDate" (change)="chartForm.form.valid && fetchChartData(chartForm)">
+        <input #startDate type="date" id="startDate" name="startDate" (change)="chartForm.form.valid && fetchChartData()">
       </div>
       <div class="form-group">
         <label for="endDate">End Date:</label>
-        <input #endDate type="date" id="endDate" name="endDate" (change)="chartForm.form.valid && fetchChartData(chartForm)">
+        <input #endDate type="date" id="endDate" name="endDate" (change)="chartForm.form.valid && fetchChartData()">
       </div>
     </form>
   </div>
