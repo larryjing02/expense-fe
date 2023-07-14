@@ -21,6 +21,13 @@ export class ExpenseService {
     return this.http.get(API_ENDPOINTS.CATEGORIES, { headers: this.headers });
   }
 
+  getExpenseChart(timeRange: string, startDate: string, endDate: string): Observable<any> {
+    return this.http.get(API_ENDPOINTS.CHART, {
+      params: { timeRange, startDate, endDate },
+      headers: this.headers
+    });
+  }
+  
   addExpense(expense: ExpenseItem): Observable<ExpenseItem> {
     expense.UserId = this.userId;
     return this.http.post<ExpenseItem>(API_ENDPOINTS.EXPENSE, expense, { headers: this.headers });

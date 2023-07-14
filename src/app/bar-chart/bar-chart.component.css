@@ -1,0 +1,17 @@
+.bar-chart {
+  background-color: white;
+  width: 58.5vw;
+  height: 73vh;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 1rem;
+}
+.canvas-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  height: 100%;
+}
