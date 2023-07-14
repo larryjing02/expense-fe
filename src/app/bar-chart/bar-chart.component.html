@@ -2,7 +2,7 @@
   <div class="form-container">
     <form #chartForm="ngForm" (ngSubmit)="fetchChartData(chartForm)" autocomplete="off">
       <div class="form-group">
-        <label for="timeRange">Time Range:</label>
+        <label for="timeRange">Time:</label>
         <select #timeRange id="timeRange" name="timeRange" (change)="chartForm.form.valid && fetchChartData(chartForm)">
             <option value="day">Day</option>
             <option value="week">Week</option>
