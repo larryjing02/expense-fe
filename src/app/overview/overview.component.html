@@ -1,3 +1,11 @@
 <div class="overview">
-  <app-bar-chart></app-bar-chart>
+  <div class="row">
+    <div class="box" *ngFor="let category of topCategories">
+        <h3>{{ category.Key }}</h3>
+        <p>${{ category.Value | number:'1.2-2' }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <app-bar-chart></app-bar-chart>
+  </div>
 </div>

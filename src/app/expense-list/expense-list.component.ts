@@ -42,6 +42,7 @@ export class ExpenseListComponent implements OnInit {
     this.expenseService.deleteExpense(expenseId).subscribe({
       next: expenses => {
         this.refreshExpenses();
+        this.expenseService.refreshExpenseCategories();
       },
       error: error => {
         console.log('Error when deleting from expense list: ', error);
@@ -97,6 +98,7 @@ export class ExpenseListComponent implements OnInit {
         this.isLoading = false;
         this.isFormVisible = false;
         this.editedExpense = null;
+        this.expenseService.refreshExpenseCategories();
       });
     } else {
       this.expenseService.addExpense(expense).subscribe(() => {
@@ -104,6 +106,7 @@ export class ExpenseListComponent implements OnInit {
         expenseForm.reset();
         this.isLoading = false;
         this.isFormVisible = false;
+        this.expenseService.refreshExpenseCategories();
       });
     }
   }

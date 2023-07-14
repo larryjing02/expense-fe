@@ -1,0 +1,35 @@
+.overview {
+  margin-top: 1vh;
+  width: 58.5vw;
+  height: 88vh;
+  /* background-color: gray; */
+  box-sizing: border-box;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.row {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.box {
+  background: white;
+  border-radius: 1rem;
+  width: 100%;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-right: 1vw;
+}
+
+.box:last-child {
+  margin-right: 0;
+}

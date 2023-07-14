@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ExpenseItem } from '../models/expense-item.model';
 import { API_ENDPOINTS } from '../constants/api-endpoints';
 import { AuthService } from './auth.service';
@@ -9,10 +9,16 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class ExpenseService {
+  topCategoriesUpdated = new Subject<void>();
+
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getExpenses(): Observable<ExpenseItem[]> {
     return this.http.get<ExpenseItem[]>(API_ENDPOINTS.EXPENSE, { headers: this.headers });
+  }
+
+  getExpenseCategories(): Observable<any> {
+    return this.http.get(API_ENDPOINTS.CATEGORIES, { headers: this.headers });
   }
 
   addExpense(expense: ExpenseItem): Observable<ExpenseItem> {
@@ -27,6 +33,13 @@ export class ExpenseService {
 
   deleteExpense(id: string): Observable<{}> {
     return this.http.delete(`${API_ENDPOINTS.EXPENSE}/${id}`, { headers: this.headers });
+  }
+
+  // Used to update categories across components when necessary
+  refreshExpenseCategories() {
+    this.getExpenseCategories().subscribe(() => {
+      this.topCategoriesUpdated.next();
+    });
   }
 
   private get headers() {
