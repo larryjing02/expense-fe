@@ -13,7 +13,7 @@ export class OverviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchTopCategories();
-    this.expenseService.topCategoriesUpdated.subscribe(() => {
+    this.expenseService.expensesUpdated.subscribe(() => {
       this.fetchTopCategories();
     });
   }

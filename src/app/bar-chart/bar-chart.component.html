@@ -1,5 +1,25 @@
 <div class="bar-chart">
-  <!-- TODO: Add dropdown menu for selectors -->
+  <div class="form-container">
+    <form #chartForm="ngForm" (ngSubmit)="fetchChartData(chartForm)" autocomplete="off">
+      <div class="form-group">
+        <label for="timeRange">Time Range:</label>
+        <select #timeRange id="timeRange" name="timeRange" (change)="chartForm.form.valid && fetchChartData(chartForm)">
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+            <option value="month">Month</option>
+            <option value="year">Year</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="startDate">Start Date:</label>
+        <input #startDate type="date" id="startDate" name="startDate" (change)="chartForm.form.valid && fetchChartData(chartForm)">
+      </div>
+      <div class="form-group">
+        <label for="endDate">End Date:</label>
+        <input #endDate type="date" id="endDate" name="endDate" (change)="chartForm.form.valid && fetchChartData(chartForm)">
+      </div>
+    </form>
+  </div>
   <div class="canvas-container">
     <canvas baseChart
     [datasets]="barChartData"

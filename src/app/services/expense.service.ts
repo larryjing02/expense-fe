@@ -9,7 +9,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class ExpenseService {
-  topCategoriesUpdated = new Subject<void>();
+  expensesUpdated = new Subject<void>();
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -27,7 +27,7 @@ export class ExpenseService {
       headers: this.headers
     });
   }
-  
+
   addExpense(expense: ExpenseItem): Observable<ExpenseItem> {
     expense.UserId = this.userId;
     return this.http.post<ExpenseItem>(API_ENDPOINTS.EXPENSE, expense, { headers: this.headers });
@@ -45,7 +45,7 @@ export class ExpenseService {
   // Used to update categories across components when necessary
   refreshExpenseCategories() {
     this.getExpenseCategories().subscribe(() => {
-      this.topCategoriesUpdated.next();
+      this.expensesUpdated.next();
     });
   }
 
