@@ -17,6 +17,21 @@
   margin-top: 0;
 }
 
+.expenses-container {
+  height: 73vh;
+  overflow-y: auto;
+}
+
+.expenses-container::after {
+  content: '';
+  position: absolute;
+  bottom: 4em;
+  left: 0;
+  width: 100%;
+  height: 10em;
+  background-image: linear-gradient(to top, white, transparent);
+}
+
 .expense-list button {
   display: block;
   margin: 1em;

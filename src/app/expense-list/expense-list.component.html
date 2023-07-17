@@ -1,7 +1,9 @@
 <div class="expense-list">
   <h2>Expense History</h2>
-  <div *ngFor="let expense of expenses">
-    <app-expense-item [expense]="expense" (delete)="handleDelete(expense.Id)" (edit)="handleEdit($event)"></app-expense-item>
+  <div class="expenses-container">
+    <div *ngFor="let expense of expenses">
+      <app-expense-item [expense]="expense" (delete)="handleDelete(expense.Id)" (edit)="handleEdit($event)"></app-expense-item>
+    </div>
   </div>
   <button (click)="isFormVisible = true; editedExpense = null;">Add Expense</button>
 </div>
