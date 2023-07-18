@@ -17,16 +17,22 @@
   margin-bottom: 1vw;
 }
 
+.bar-chart-container {
+  width: 100%;
+}
+
 .box {
   position: relative;
   background: white;
   border-radius: 1rem;
   width: 100%;
+  height: calc(15vh - 1vw);
   padding: 1em;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   margin-right: 1vw;
+  box-sizing: border-box;
   overflow: hidden;
 }
 
