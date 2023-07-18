@@ -13,30 +13,38 @@ export class BarChartComponent implements AfterViewInit {
   @ViewChild('startDate') startDate!: ElementRef;
   @ViewChild('endDate') endDate!: ElementRef;
 
-  public barChartOptions: ChartOptions = {
-    responsive: true,
-    scales: {
-      x: {
-        display: true,
-        title: {
+  selectedTimeRange: string = 'day';
+
+  public barChartOptions: ChartOptions = this.getChartOptions(this.selectedTimeRange);
+
+  // Function to create a new ChartOptions object
+  getChartOptions(timeRange: string): ChartOptions {
+    return {
+      responsive: true,
+      scales: {
+        x: {
           display: true,
-          text: 'Months',
+          title: {
+            display: true,
+            // Update this line to use the variable
+            text: this.capitalizeFirstLetter(timeRange),
+          },
+        },
+        y: {
+          display: true,
+          title: {
+            display: true,
+            text: 'Expense Amount ($)',
+          },
         },
       },
-      y: {
-        display: true,
-        title: {
-          display: true,
-          text: 'Expense Amount ($)',
+      plugins: {
+        legend: {
+          display: false,
         },
       },
-    },
-    plugins: {
-      legend: {
-        display: false,
-      },
-    },
-  };
+    };
+  }
 
   // The labels for the x-axis
   barChartLabels: string[] = [];
@@ -63,17 +71,21 @@ export class BarChartComponent implements AfterViewInit {
   }
 
   fetchChartData() {
-    const timeRange = this.timeRange.nativeElement.value;
+    this.selectedTimeRange = this.timeRange.nativeElement.value;
     const startDate = this.startDate.nativeElement.value;
     const endDate = this.endDate.nativeElement.value;
-    if (timeRange == null || startDate == null) {
+    if (this.selectedTimeRange == null || startDate == null) {
       return;
     }
-    console.log("fetching chart data")
-    this.expenseService.getExpenseChart(timeRange, startDate, endDate).subscribe((data: Array<{ Key: string, Value: number }>) => {
-      console.log("Chart data fetched!!!!");
+
+    this.barChartOptions = this.getChartOptions(this.selectedTimeRange);
+    this.expenseService.getExpenseChart(this.selectedTimeRange, startDate, endDate).subscribe((data: Array<{ Key: string, Value: number }>) => {
       this.barChartLabels = data.map(item => item.Key);
       this.barChartData[0].data = data.map(item => item.Value) as any[];
     });
+  }
+
+  capitalizeFirstLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
   }
 }
